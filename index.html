@@ -123,8 +123,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   border-radius: 0 60% 45% 0 / 0 55% 50% 0; }
 .cartao-escuro { background: var(--grafite); border-radius: 24px 24px var(--raio-grande) 24px; padding: 18px 18px 32px;
   display: grid; gap: 24px; position: relative; border: 1px solid color-mix(in srgb, var(--eletrico) 25%, transparent); }
-.cartao-escuro .foto { border-radius: 16px; overflow: hidden; aspect-ratio: 4 / 3; }
-.cartao-escuro .foto img { width: 100%; height: 100%; object-fit: cover; }
+/* Takes do ensaio: uma foto larga em cima e duas verticais embaixo */
+.takes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; min-width: 0; }
+.takes img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; aspect-ratio: 1; }
+.takes .take-grande { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
 .intro-texto { display: grid; gap: 20px; min-width: 0; padding-inline: 4px; }
 .intro-texto > .caps { color: var(--eletrico); }
 .acende { font-family: var(--f-titulo); font-weight: 500; font-size: 1.35rem; line-height: 1.32; letter-spacing: -.01em; }
@@ -140,7 +142,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   .bloco-intro { padding-top: 72px; }
   .bloco-intro::before { left: -12%; top: 14%; width: 42%; height: 76%; }
   .cartao-escuro { grid-template-columns: .9fr 1.1fr; gap: 52px; align-items: center; padding: 44px; }
-  .cartao-escuro .foto { aspect-ratio: 4 / 5; border-radius: 20px; }
+  .takes { gap: 10px; }
+  .takes img { aspect-ratio: 3 / 4; border-radius: 18px; }
   .acende { font-size: clamp(1.5rem, 2.4vw, 2rem); }
 }
 
@@ -360,7 +363,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 <section class="faixa bloco-intro" id="festa">
   <div class="miolo">
     <div class="cartao-escuro">
-      <div class="foto"><img src="assets/festa-134.jpg" alt="Noivas dançando no meio da pista cheia"></div>
+      <!-- Takes do ensaio de 11/10/2026. Para trocar, substitua os arquivos em assets/ -->
+      <div class="takes">
+        <img class="take-grande" src="assets/ensaio-gopro-1.jpg" alt="Drinn no baixo, Negabelle no vocal e Pedro Per na guitarra durante o ensaio">
+        <img src="assets/ensaio-negabelle.jpg" alt="Negabelle cantando no ensaio, com Igor Moreira na bateria e Pedro Per na guitarra">
+        <img src="assets/ensaio-voz-guitarra.jpg" alt="Negabelle e Pedro Per no ensaio, com Drinn no baixo ao fundo">
+      </div>
       <div class="intro-texto">
         <p class="caps">A Violet Night</p>
         <p class="acende" data-acende>A Violet Night é uma banda focada na experiência completa da sua festa. A gente passeia por todos os estilos para a pista ficar cheia do começo ao fim. Daqui a dez anos, ninguém vai lembrar do cardápio. Vão lembrar da pista lotada, dos amigos abraçados gritando o refrão e de vocês dois dançando no meio de todo mundo. <em>É essa noite que a gente veio fazer.</em></p>
