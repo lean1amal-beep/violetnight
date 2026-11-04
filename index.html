@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Violet Night | Banda para Casamento no Rio de Janeiro</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Banda ao vivo e DJ para casamentos e eventos no RJ. Pop, rock nacional, pagode e sertanejo, com repertório montado com os noivos. Consulte sua data.">
+<meta property="og:title" content="Violet Night | Banda para Casamento no Rio de Janeiro">
+<meta property="og:description" content="Sua festa com a trilha sonora da sua vida. Banda ao vivo + DJ para casamentos e eventos.">
+<meta property="og:image" content="assets/pista-poster.jpg">
+<link rel="icon" href="assets/logo-vn.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Outfit:wght@300;500;700;800&display=swap">
+<style>
+/* =====================================================================
+   VIOLET NIGHT  ·  MOBILE FIRST
+   O CSS base é o do celular. Telas maiores ganham ajustes nos blocos
+   @media (min-width: ...) no fim de cada seção.
+   Referências: Farofa Carioca (cor da marca em blocos grandes, cantos
+   bem arredondados, selo redondo, títulos em caixa baixa) + From Zero
+   (logo grande no topo, faixa inclinada, texto que acende, FAQ claro).
+   Para trocar cores/fontes, mude só os tokens abaixo.
+   ===================================================================== */
+:root {
+  color-scheme: dark;
+  --roxo:        #5a0fc8;  /* roxo da marca, escuro e intenso: blocos, faixas, rodapé */
+  --roxo-fundo:  #3d0a8a;  /* roxo mais fundo para sombras e gradientes */
+  --eletrico:    #a63bff;  /* violeta elétrico: destaques sobre o escuro */
+  --ouro:        #ffc21a;  /* dourado brilhante: botões, números, destaques no roxo */
+  --noite:       #0b0612;  /* fundo principal */
+  --grafite:     #170e24;  /* blocos escuros */
+  --nevoa:       #f4f1f9;  /* seções claras */
+  --tinta:       #120a1c;  /* texto sobre fundo claro */
+  --branco:      #ffffff;
+  --cinza:       #c3b6d6;  /* texto secundário no escuro */
+  --cinza-claro: #4a3d5c;  /* texto secundário no claro */
+
+  --f-titulo: "Outfit", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-texto:  "Inter Tight", "Helvetica Neue", Arial, system-ui, sans-serif;
+
+  --largura: 1180px;
+  --gl: max(18px, env(safe-area-inset-left, 0px));
+  --gr: max(18px, env(safe-area-inset-right, 0px));
+  --raio-grande: 48px;
+}
+@media (min-width: 900px) { :root { --raio-grande: 110px; --gl: max(28px, env(safe-area-inset-left, 0px)); --gr: max(28px, env(safe-area-inset-right, 0px)); } }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--noite); color: var(--branco); font-family: var(--f-texto); font-size: 1rem; line-height: 1.6; overflow-x: hidden; }
+img, video { max-width: 100%; display: block; }
+a { color: inherit; }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--ouro); outline-offset: 3px; border-radius: 6px; }
+h1, h2, h3 { font-family: var(--f-titulo); margin: 0; text-wrap: balance; }
+p { margin: 0; }
+
+/* Títulos estilo "notícias quentinhas": caixa baixa, palavras em destaque */
+.titulo { font-weight: 300; font-size: clamp(2rem, 8vw, 3.6rem); line-height: 1.05; letter-spacing: -.02em; text-transform: lowercase; }
+.titulo b { font-weight: 800; }
+.titulo .d { color: var(--roxo); font-weight: 800; }
+.no-escuro .titulo .d { color: var(--eletrico); }
+.no-roxo .titulo .d { color: var(--ouro); }
+.caps { text-transform: uppercase; letter-spacing: .14em; font-size: .78rem; font-weight: 700; }
+
+.faixa { padding-left: var(--gl); padding-right: var(--gr); padding-block: 64px; position: relative; }
+.miolo { max-width: var(--largura); margin: 0 auto; position: relative; }
+@media (min-width: 900px) { .faixa { padding-block: 112px; } body { font-size: 1.05rem; } }
+
+/* Botões em pílula (área de toque mínima de 48px) */
+.botao { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; text-decoration: none; font-weight: 700; font-size: 1rem;
+  padding: 13px 26px; border-radius: 999px; background: var(--ouro); color: var(--tinta); transition: transform .2s, box-shadow .2s; }
+.botao:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -8px var(--ouro); }
+.botao.escuro { background: var(--tinta); color: var(--branco); }
+.botao.contorno { background: transparent; color: inherit; border: 1.5px solid currentColor; }
+.botao svg { width: 20px; height: 20px; flex: none; }
+
+/* ---------- Menu ---------- */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 40; background: var(--noite); }
+.topo { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--noite); padding-left: var(--gl); padding-right: var(--gr); }
+.topo .miolo { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 64px; }
+.topo .marca img { width: 46px; height: 46px; }
+.menu { display: none; }
+.topo .botao { min-height: 42px; padding: 8px 16px; font-size: .88rem; }
+@media (min-width: 960px) {
+  .topo .miolo { height: 72px; }
+  .menu { display: flex; list-style: none; margin: 0; padding: 0; align-self: stretch; }
+  .menu a { display: flex; align-items: center; height: 100%; padding: 0 16px; text-decoration: none; font-size: .9rem; color: var(--cinza); }
+  .menu a:hover { color: var(--branco); }
+  .menu a.ativo { background: var(--roxo); color: var(--branco); font-weight: 600; } /* aba ativa como no Farofa */
+}
+
+/* ---------- Hero: logo grande sobre a pista ---------- */
+.hero { padding: 0; overflow: hidden; background: var(--noite); }
+.hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(1.5px) saturate(1.2); transform: scale(1.04); opacity: .6; }
+.hero::after { content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, transparent 0, var(--noite) 80%), linear-gradient(180deg, color-mix(in srgb, var(--roxo) 35%, transparent), var(--noite)); }
+.hero .miolo { z-index: 1; display: grid; justify-items: center; text-align: center; gap: 20px; padding: 28px var(--gr) 104px var(--gl); }
+.hero .logo-grande { width: min(260px, 66vw); filter: drop-shadow(0 0 36px color-mix(in srgb, var(--eletrico) 70%, transparent)); }
+.hero h1 { font-weight: 300; font-size: clamp(2rem, 9vw, 4rem); line-height: 1.05; letter-spacing: -.02em; text-transform: lowercase; max-width: 15ch; }
+.hero h1 b { font-weight: 800; color: var(--ouro); }
+.hero .apoio { color: var(--cinza); font-size: .9rem; max-width: 30ch; }
+@media (min-width: 900px) {
+  .hero .miolo { gap: 24px; padding: 64px var(--gr) 170px var(--gl); }
+  .hero .logo-grande { width: 360px; }
+  .hero .apoio { max-width: none; }
+}
+
+/* ---------- Faixa inclinada que corre (From Zero) ---------- */
+.letreiro-wrap { position: relative; z-index: 3; margin-top: -56px; height: 96px; overflow: hidden; }
+.letreiro { position: absolute; left: -6%; right: -6%; top: 24px; transform: rotate(-3deg); background: var(--roxo); color: var(--branco);
+  overflow: hidden; padding-block: 10px; box-shadow: 0 0 36px -6px color-mix(in srgb, var(--eletrico) 80%, transparent); }
+.letreiro div { display: flex; width: max-content; animation: corre 24s linear infinite; }
+.letreiro span { font-family: var(--f-titulo); font-weight: 800; font-size: 1.1rem; text-transform: uppercase; white-space: nowrap; padding-right: .6em; }
+.letreiro span i { font-style: normal; color: var(--ouro); padding: 0 .4em; }
+@keyframes corre { to { transform: translateX(-50%); } }
+@media (min-width: 900px) { .letreiro-wrap { margin-top: -70px; height: 120px; } .letreiro { top: 30px; padding-block: 14px; } .letreiro span { font-size: 1.9rem; } }
+
+/* ---------- Intro: forma roxa + bloco escuro arredondado (Farofa) ---------- */
+.bloco-intro { padding-top: 32px; overflow: hidden; }
+.bloco-intro::before { content: ""; position: absolute; left: -30%; top: 6%; width: 70%; height: 60%; background: var(--roxo);
+  border-radius: 0 60% 45% 0 / 0 55% 50% 0; }
+.cartao-escuro { background: var(--grafite); border-radius: 24px 24px var(--raio-grande) 24px; padding: 18px 18px 32px;
+  display: grid; gap: 24px; position: relative; border: 1px solid color-mix(in srgb, var(--eletrico) 25%, transparent); }
+.cartao-escuro .foto { border-radius: 16px; overflow: hidden; aspect-ratio: 4 / 3; }
+.cartao-escuro .foto img { width: 100%; height: 100%; object-fit: cover; }
+.intro-texto { display: grid; gap: 20px; min-width: 0; padding-inline: 4px; }
+.intro-texto > .caps { color: var(--eletrico); }
+.acende { font-family: var(--f-titulo); font-weight: 500; font-size: 1.35rem; line-height: 1.32; letter-spacing: -.01em; }
+.acende em { font-style: normal; color: var(--ouro); }
+.acende .w { color: #5a4c6b; transition: color .35s; }
+.acende .w.on { color: var(--branco); }
+.acende .w.ouro.on { color: var(--ouro); }
+.redes-linha { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.redes-linha .barras { letter-spacing: -.05em; color: var(--eletrico); font-weight: 700; }
+.redes-linha a { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; border: 1px solid #3b2d50; color: var(--branco); }
+.redes-linha svg { width: 18px; height: 18px; }
+@media (min-width: 820px) {
+  .bloco-intro { padding-top: 72px; }
+  .bloco-intro::before { left: -12%; top: 14%; width: 42%; height: 76%; }
+  .cartao-escuro { grid-template-columns: .9fr 1.1fr; gap: 52px; align-items: center; padding: 44px; }
+  .cartao-escuro .foto { aspect-ratio: 4 / 5; border-radius: 20px; }
+  .acende { font-size: clamp(1.5rem, 2.4vw, 2rem); }
+}
+
+/* ---------- Selo redondo (adesivo/disco) ---------- */
+.selo { position: absolute; width: 116px; aspect-ratio: 1; border-radius: 50%; background: var(--tinta);
+  display: grid; place-items: center; box-shadow: 0 0 0 3px var(--ouro), 0 18px 40px -18px #000; z-index: 2; }
+.selo svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: gira 22s linear infinite; }
+.selo text { fill: var(--branco); font-family: var(--f-texto); font-weight: 700; font-size: 15px; }
+.selo img { width: 46%; position: relative; }
+@keyframes gira { to { transform: rotate(360deg); } }
+@media (min-width: 900px) { .selo { width: 180px; } }
+
+/* ---------- Diferenciais: números grandes (como os anos do Farofa) ---------- */
+.diferenciais { background: var(--nevoa); color: var(--tinta); padding-top: 88px; }
+.diferenciais .selo { right: var(--gr); top: -56px; } /* selo inteiro, na divisa entre as seções */
+.cabeca { display: grid; gap: 14px; margin-bottom: 36px; max-width: 780px; }
+.cabeca.centro { margin-inline: auto; text-align: center; justify-items: center; }
+.cabeca .linha-apoio { color: var(--cinza-claro); max-width: 62ch; }
+.cabeca .caps { color: var(--roxo); }
+.grade-3 { display: grid; gap: 40px; }
+.dif { display: grid; gap: 10px; align-content: start; text-align: center; justify-items: center; }
+.dif .numero { font-family: var(--f-titulo); font-weight: 800; font-size: 3rem; line-height: 1; color: var(--roxo); letter-spacing: -.03em; }
+.dif h3 { font-size: 1.25rem; font-weight: 700; }
+.dif p:last-child { color: var(--cinza-claro); font-size: .97rem; max-width: 34ch; }
+@media (min-width: 820px) {
+  .cabeca { margin-bottom: 56px; }
+  .grade-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px; }
+  .dif .numero { font-size: clamp(3rem, 5vw, 4.2rem); }
+  .diferenciais { padding-top: 120px; }
+  .diferenciais .selo { right: max(40px, calc((100% - var(--largura)) / 2)); top: -90px; }
+}
+
+/* ---------- Repertório: bloco de álbum (capa + lista de faixas) ---------- */
+.repertorio { background: var(--roxo); color: var(--branco); padding-block: 0; overflow: hidden; }
+.repertorio .miolo { display: grid; }
+.capa { position: relative; min-height: 320px; margin-inline: calc(-1 * var(--gl)) calc(-1 * var(--gr)); }
+.capa img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.capa::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, var(--roxo)); }
+.capa .carimbo { position: absolute; left: var(--gl); bottom: 20px; z-index: 1; font-family: var(--f-titulo); font-weight: 800; font-size: 1.7rem;
+  text-transform: uppercase; line-height: .95; text-shadow: 0 4px 20px rgba(0,0,0,.5); }
+.faixas { padding-block: 36px 64px; display: grid; gap: 22px; align-content: center; min-width: 0; }
+.faixas > .caps { color: var(--ouro); }
+.faixas .titulo { font-size: clamp(1.8rem, 7vw, 2.7rem); }
+.faixas ol { margin: 0; padding: 0; list-style: none; counter-reset: f; display: grid; gap: 8px; font-size: .95rem; }
+.faixas li { counter-increment: f; display: flex; gap: 10px; border-bottom: 1px solid rgba(255,255,255,.22); padding-bottom: 7px; min-width: 0; line-height: 1.3; }
+.faixas li::before { content: counter(f) "."; font-weight: 800; color: var(--ouro); min-width: 1.7em; font-variant-numeric: tabular-nums; }
+.faixas li span { font-weight: 600; }
+.faixas li small { opacity: .75; display: block; font-size: .82rem; }
+.estilos { font-size: .96rem; }
+.pede { display: grid; gap: 14px; justify-items: start; }
+.pede strong { font-family: var(--f-titulo); font-size: 1.25rem; font-weight: 700; }
+@media (min-width: 560px) { .faixas ol { grid-template-columns: 1fr 1fr; column-gap: 28px; } }
+@media (min-width: 900px) {
+  .repertorio .miolo { grid-template-columns: 1fr 1fr; align-items: stretch; }
+  .capa { min-height: 560px; margin-right: 0; }
+  .capa::after { background: linear-gradient(90deg, transparent 55%, var(--roxo)); }
+  .capa .carimbo { bottom: 28px; font-size: 2.6rem; }
+  .faixas { padding: 80px 0 80px 52px; }
+  .pede { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; }
+}
+
+/* ---------- Banda: cards coloridos (como a loja do Farofa) ---------- */
+.banda { background: var(--nevoa); color: var(--tinta); }
+.grade-4 { display: grid; gap: 36px; justify-items: center; }
+.membro { margin: 0; display: grid; gap: 10px; text-align: center; justify-items: center; align-content: start; max-width: 340px; }
+.membro .moldura { width: 100%; aspect-ratio: 4 / 5; border-radius: 26px; overflow: hidden; padding: 10px; }
+.membro .moldura img { width: 100%; height: 100%; object-fit: cover; border-radius: 18px; }
+.membro:nth-child(1) .moldura { background: var(--roxo); }
+.membro:nth-child(2) .moldura { background: var(--ouro); }
+.membro:nth-child(3) .moldura { background: var(--tinta); }
+.membro:nth-child(4) .moldura { background: var(--eletrico); }
+.membro h3 { font-size: 1.25rem; font-weight: 700; }
+.membro .caps { color: var(--roxo); }
+.membro p:last-child { font-size: .93rem; color: var(--cinza-claro); max-width: 30ch; }
+@media (min-width: 560px) { .grade-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; } }
+@media (min-width: 980px) { .grade-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* ---------- Como funciona: caixa escura arredondada (agenda do Farofa) ---------- */
+.processo { background: var(--nevoa); padding-top: 0; }
+.caixa { background: var(--grafite); color: var(--branco); border-radius: 28px; padding: 36px 22px; }
+.caixa .titulo, .caixa .titulo b { color: var(--ouro); }
+.passos { list-style: none; margin: 0; padding: 0; display: grid; gap: 26px; counter-reset: p; }
+.passos li { counter-increment: p; display: grid; grid-template-columns: 44px 1fr; column-gap: 14px; row-gap: 4px; align-content: start; }
+.passos li::before { content: counter(p); grid-row: span 2; width: 44px; height: 44px; border-radius: 50%; background: var(--roxo); color: var(--branco); display: grid; place-items: center;
+  font-family: var(--f-titulo); font-weight: 800; font-size: 1.2rem; box-shadow: 0 0 20px -4px var(--eletrico); }
+.passos h3 { font-size: 1.15rem; font-weight: 700; align-self: center; }
+.passos p { color: var(--cinza); font-size: .96rem; }
+@media (min-width: 640px) { .passos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 980px) {
+  .caixa { border-radius: 36px; padding: 60px; }
+  .passos { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
+  .passos li { grid-template-columns: 1fr; row-gap: 10px; }
+  .passos li::before { grid-row: auto; }
+}
+
+/* ---------- Quem viveu, conta: faixa roxa com curva (notícias do Farofa) ---------- */
+.fundo-claro { background: var(--nevoa); }
+.prova { background: var(--roxo); color: var(--branco); border-radius: var(--raio-grande) var(--raio-grande) 0 0; }
+.cards { display: grid; gap: 18px; max-width: 460px; margin-inline: auto; }
+.card { background: var(--tinta); color: var(--branco); border-radius: 22px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+.card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.card div { padding: 18px 20px 22px; display: grid; gap: 6px; align-content: start; }
+.card h3 { font-size: 1.12rem; font-weight: 700; color: var(--ouro); }
+.card p { color: var(--cinza); font-size: .94rem; }
+.depo { margin-top: 28px; border: 2px dashed rgba(255,255,255,.5); border-radius: 22px; padding: 22px; display: grid; gap: 16px; justify-items: start; }
+.depo p { font-family: var(--f-titulo); font-size: 1.1rem; font-weight: 500; max-width: 60ch; }
+@media (min-width: 820px) {
+  .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: none; gap: 26px; }
+  .depo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 26px 28px; margin-top: 44px; }
+}
+
+/* ---------- Dúvidas: fundo claro (From Zero) ---------- */
+.duvidas { background: var(--nevoa); color: var(--tinta); }
+.duvidas .miolo { max-width: 900px; }
+.duvidas details { border-bottom: 1px solid #d8cfe6; }
+.duvidas summary { cursor: pointer; list-style: none; padding: 20px 44px 20px 2px; position: relative; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; font-size: .92rem; }
+.duvidas summary::-webkit-details-marker { display: none; }
+.duvidas summary::after { content: "+"; position: absolute; right: 6px; top: 50%; transform: translateY(-50%); font-size: 1.7rem; color: var(--roxo); transition: transform .2s; }
+.duvidas details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+.duvidas details p { padding: 0 2px 20px; color: var(--cinza-claro); max-width: 64ch; }
+@media (min-width: 820px) { .duvidas summary { font-size: .98rem; padding-block: 22px; } }
+
+/* ---------- Siga a Violet: grade do Instagram ---------- */
+.siga { background: var(--noite); }
+.siga .cabeca { margin-bottom: 28px; }
+.insta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.insta img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; }
+@media (min-width: 820px) { .insta { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; } }
+
+/* ---------- Rodapé roxo com contatos (Farofa) ---------- */
+.rodape { background: var(--roxo); color: var(--branco); padding-left: var(--gl); padding-right: var(--gr); padding-top: 56px; position: relative; overflow: hidden;
+  border-radius: var(--raio-grande) var(--raio-grande) 0 0; }
+.rodape .miolo { display: grid; gap: 32px; }
+.rod-texto { display: grid; gap: 24px; min-width: 0; }
+.contatos { display: grid; gap: 18px; }
+.contatos h3 { font-size: 1.1rem; font-weight: 700; color: var(--ouro); }
+.contatos a { text-decoration: none; display: inline-block; padding-block: 6px; }
+.contatos a:hover { text-decoration: underline; }
+.rod-foto { max-width: 420px; }
+.rod-foto img { width: 100%; max-height: 420px; object-fit: cover; border-radius: 24px 24px 0 0; }
+.rod-base { background: var(--tinta); color: var(--cinza); font-size: .8rem; padding: 16px var(--gr) calc(16px + env(safe-area-inset-bottom, 0px)) var(--gl);
+  margin-left: calc(-1 * var(--gl)); margin-right: calc(-1 * var(--gr)); }
+.rod-base .miolo { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 16px; }
+@media (min-width: 820px) {
+  .rodape { padding-top: 96px; }
+  .rodape .miolo { grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: end; }
+  .rod-texto { padding-bottom: 72px; }
+  .contatos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rod-foto { max-width: none; }
+}
+
+/* Botão flutuante do WhatsApp */
+.flutuante { position: fixed; z-index: 35; right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--ouro); color: var(--tinta);
+  box-shadow: 0 12px 30px -8px rgba(0,0,0,.6), 0 0 0 4px color-mix(in srgb, var(--ouro) 30%, transparent); }
+.flutuante svg { width: 28px; height: 28px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .letreiro div, .selo svg { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Ícones reaproveitados -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-whats" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91A9.85 9.85 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.23 8.23 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24a8.24 8.24 0 0 1 8.24 8.25c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.16-.48-.29Z"/></symbol>
+  <symbol id="i-insta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
+</svg>
+
+<!-- =========================================================
+     MENU
+     Número do WhatsApp: troque 5521967152172 em todos os links wa.me
+     ========================================================= -->
+<header class="topo">
+  <div class="miolo">
+    <a class="marca" href="#inicio" aria-label="Violet Night, voltar ao início"><img src="assets/logo-vn.png" alt=""></a>
+    <ul class="menu">
+      <li><a class="ativo" href="#inicio">Início</a></li>
+      <li><a href="#festa">A festa</a></li>
+      <li><a href="#repertorio">Repertório</a></li>
+      <li><a href="#banda">A banda</a></li>
+      <li><a href="#como-funciona">Como funciona</a></li>
+      <li><a href="#duvidas">Dúvidas</a></li>
+    </ul>
+    <a class="botao" href="https://wa.me/5521967152172?text=Oi%2C%20Violet%20Night!%20Vou%20casar%20em%20%5Bdata%5D%20em%20%5Bcidade%5D%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">Verificar agenda</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= HERO: logo grande sobre a pista ================= -->
+<section class="faixa hero" id="inicio">
+  <video src="assets/pista.mp4" poster="assets/pista-poster.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
+  <div class="miolo">
+    <img class="logo-grande" src="assets/logo.png" alt="Violet Night">
+    <h1>sua festa com a <b>trilha sonora</b> da sua vida.</h1>
+    <a class="botao" href="https://wa.me/5521967152172?text=Oi%2C%20Violet%20Night!%20Vou%20casar%20em%20%5Bdata%5D%20em%20%5Bcidade%5D%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">
+      <svg aria-hidden="true"><use href="#i-whats"/></svg>Verificar agenda
+    </a>
+    <p class="apoio">Banda ao vivo + DJ · Casamentos e eventos · Rio de Janeiro</p>
+  </div>
+</section>
+
+<!-- Faixa inclinada que corre -->
+<div class="letreiro-wrap" aria-hidden="true">
+  <div class="letreiro">
+    <div>
+      <span>Violet Night <i>✦</i> Banda + DJ <i>✦</i> Casamentos e eventos <i>✦</i> A pista não para <i>✦</i> Rio de Janeiro <i>✦</i></span>
+      <span>Violet Night <i>✦</i> Banda + DJ <i>✦</i> Casamentos e eventos <i>✦</i> A pista não para <i>✦</i> Rio de Janeiro <i>✦</i></span>
+    </div>
+  </div>
+</div>
+
+<!-- ================= INTRO: forma roxa + bloco escuro ================= -->
+<section class="faixa bloco-intro" id="festa">
+  <div class="miolo">
+    <div class="cartao-escuro">
+      <div class="foto"><img src="assets/festa-134.jpg" alt="Noivas dançando no meio da pista cheia"></div>
+      <div class="intro-texto">
+        <p class="caps">A Violet Night</p>
+        <p class="acende" data-acende>A Violet Night é uma banda focada na experiência completa da sua festa. A gente passeia por todos os estilos para a pista ficar cheia do começo ao fim. Daqui a dez anos, ninguém vai lembrar do cardápio. Vão lembrar da pista lotada, dos amigos abraçados gritando o refrão e de vocês dois dançando no meio de todo mundo. <em>É essa noite que a gente veio fazer.</em></p>
+        <div class="redes-linha">
+          <span class="barras">//////////</span>
+          <a href="https://www.instagram.com/bandavioletnight/" target="_blank" rel="noopener" aria-label="Instagram da Violet Night"><svg><use href="#i-insta"/></svg></a>
+          <a href="https://wa.me/5521967152172" target="_blank" rel="noopener" aria-label="WhatsApp da Violet Night"><svg><use href="#i-whats"/></svg></a>
+          <span class="barras">//////////</span>
+        </div>
+        <div><a class="botao contorno" href="#banda">Conheça a banda</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DIFERENCIAIS ================= -->
+<section class="faixa diferenciais">
+  <div class="selo" aria-hidden="true">
+    <svg viewBox="0 0 200 200"><defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+      <text><textPath href="#circ" textLength="486" lengthAdjust="spacing">VIOLET NIGHT ✦ BANDA + DJ ✦ CASAMENTOS ✦</textPath></text></svg>
+    <img src="assets/logo-vn.png" alt="">
+  </div>
+  <div class="miolo">
+    <div class="cabeca centro">
+      <p class="caps">O diferencial</p>
+      <h2 class="titulo">uma noite que <b>ninguém</b> <span class="d">quer ir embora</span></h2>
+    </div>
+    <div class="grade-3">
+      <article class="dif">
+        <p class="numero">0 min</p>
+        <h3>Ninguém volta para a mesa.</h3>
+        <p>Sabe aquele momento em que a banda para e a pista esvazia? Na sua festa ele não existe. No intervalo, um de nós assume as pick-ups e a dança continua.</p>
+      </article>
+      <article class="dif">
+        <p class="numero">+1.000</p>
+        <h3>Aquela música que é só de vocês dois.</h3>
+        <p>A do primeiro encontro, a da viagem, a que vocês cantam alto no carro. Ela vai tocar ao vivo, no dia mais importante da vida de vocês. São mais de 1.000 músicas para escolher, e se a de vocês não estiver lá, a gente inclui.</p>
+      </article>
+      <article class="dif">
+        <p class="numero">10+ anos</p>
+        <h3>Vocês só precisam viver a festa.</h3>
+        <p>Professores de música, formação na Escola Villa-Lobos e mais de 10 anos de palco cuidando de cada detalhe, enquanto vocês aproveitam cada minuto.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REPERTÓRIO: bloco de álbum ================= -->
+<section class="faixa repertorio no-roxo" id="repertorio">
+  <div class="miolo">
+    <div class="capa">
+      <img src="assets/festa-38.jpg" alt="Pedro Per cantando e tocando guitarra">
+      <p class="carimbo">Setlist<br>Violet Night</p>
+    </div>
+    <div class="faixas">
+      <p class="caps">Repertório</p>
+      <h2 class="titulo">se tocou na sua formatura, no seu primeiro carnaval ou no carro do seu pai, <span class="d">a gente toca.</span></h2>
+      <ol>
+        <li><div><span>Toda Forma de Amor</span><small>Lulu Santos</small></div></li>
+        <li><div><span>Get Lucky</span><small>Daft Punk</small></div></li>
+        <li><div><span>Valerie</span><small>Amy Winehouse</small></div></li>
+        <li><div><span>Blinding Lights</span><small>The Weeknd</small></div></li>
+        <li><div><span>Locked Out of Heaven</span><small>Bruno Mars</small></div></li>
+        <li><div><span>It's My Life</span><small>Bon Jovi</small></div></li>
+        <li><div><span>Tempo Perdido</span><small>Legião Urbana</small></div></li>
+        <li><div><span>Anna Júlia</span><small>Los Hermanos</small></div></li>
+        <li><div><span>Pro Dia Nascer Feliz</span><small>Barão Vermelho</small></div></li>
+        <li><div><span>Cheia de Manias</span><small>Raça Negra</small></div></li>
+        <li><div><span>O Descobridor dos Sete Mares</span><small>Tim Maia</small></div></li>
+        <li><div><span>Evidências</span><small>Chitãozinho &amp; Xororó</small></div></li>
+      </ol>
+      <p class="estilos"><b>Do rock nacional ao pagode, do pop internacional ao sertanejo</b>, mais o funk e o set do DJ para fechar a noite.</p>
+      <div class="pede">
+        <strong>Não achou a música de vocês? Pede. A gente arranja.</strong>
+        <a class="botao escuro" href="https://wa.me/5521967152172?text=Oi%2C%20Violet%20Night!%20Quero%20ver%20o%20repert%C3%B3rio%20completo." target="_blank" rel="noopener">Ver repertório completo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BANDA ================= -->
+<section class="faixa banda" id="banda">
+  <div class="miolo">
+    <div class="cabeca centro">
+      <p class="caps">A banda</p>
+      <h2 class="titulo">quatro músicos que sobem no palco para <span class="d">viver a festa com vocês</span></h2>
+      <p class="linha-apoio">A Violet Night é um sonho antigo de cada um de nós: viver de música participando dos momentos mais marcantes da vida das pessoas. Cada um veio de um canto diferente (MPB, nu metal, rock, pick-ups) e, juntos, a gente toca o que a sua festa pedir.</p>
+    </div>
+    <div class="grade-4">
+      <figure class="membro">
+        <div class="moldura"><img src="assets/membro-negabelle.jpg" alt="Negabelle cantando e tocando violão"></div>
+        <p class="caps">Voz e violão</p>
+        <h3>Negabelle</h3>
+        <p>Filha de seresteiro, formada em canto popular pela Escola Villa-Lobos. Está nos palcos desde 2013.</p>
+      </figure>
+      <figure class="membro">
+        <div class="moldura"><img src="assets/membro-pedro.jpg" alt="Pedro Per, guitarrista"></div>
+        <p class="caps">Guitarra</p>
+        <h3>Pedro Per</h3>
+        <p>Professor de música, veio das bandas de nu metal. O lema dele é "alegria compartilhada é alegria redobrada".</p>
+      </figure>
+      <figure class="membro">
+        <div class="moldura"><img src="assets/membro-igor.jpg" alt="Igor Moreira na bateria"></div>
+        <p class="caps">Bateria</p>
+        <h3>Igor Moreira</h3>
+        <p>Professor e espinha dorsal da banda, com estrada nos palcos do Sudeste. Pequeno na estatura, gigante no groove.</p>
+      </figure>
+      <figure class="membro">
+        <div class="moldura"><img src="assets/membro-drinn.jpg" alt="Drinn tocando baixo"></div>
+        <p class="caps">Baixo e DJ</p>
+        <h3>Drinn</h3>
+        <p>Decidiu aos 6 anos que seria um guitar hero. Já passou por bateria, guitarra e baixo, e agora comanda a pista de dois jeitos.</p>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMO FUNCIONA ================= -->
+<section class="faixa processo" id="como-funciona">
+  <div class="miolo">
+    <div class="caixa no-escuro">
+      <div class="cabeca centro">
+        <h2 class="titulo">do primeiro <b>"oi"</b> até a <span class="d">última música</span></h2>
+      </div>
+      <ol class="passos">
+        <li><h3>Nos envie uma mensagem</h3><p>Vamos conversar sobre o dia mais importante da sua vida em uma reunião, sem pressa.</p></li>
+        <li><h3>A gente monta a trilha junto</h3><p>As músicas que não podem faltar, as proibidas e a de vocês dois.</p></li>
+        <li><h3>Orçamento sem surpresa</h3><p>Feito para o seu evento, com tudo combinado antes.</p></li>
+        <li><h3>No dia, é só viver</h3><p>A gente chega, monta e toca. Vocês só se preocupam em dançar.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ================= QUEM VIVEU, CONTA ================= -->
+<div class="fundo-claro">
+<section class="faixa prova no-roxo" id="depoimento">
+  <div class="miolo">
+    <div class="cabeca centro">
+      <h2 class="titulo">quem viveu, <span class="d">conta</span></h2>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <img src="assets/festa-62.jpg" alt="Convidados abraçados dançando">
+        <div><h3>A pista lotada</h3><p>Amigos abraçados, braço pra cima e ninguém sentado.</p></div>
+      </article>
+      <article class="card">
+        <img src="assets/festa-92.jpg" alt="Noiva dançando com os convidados">
+        <div><h3>As noivas no meio de todo mundo</h3><p>O momento que a gente veio fazer acontecer.</p></div>
+      </article>
+      <article class="card">
+        <img src="assets/festa-50.jpg" alt="Igor Moreira tocando bateria durante a festa">
+        <div><h3>A banda junto com a festa</h3><p>Ao vivo, perto dos convidados, no ritmo da noite.</p></div>
+      </article>
+    </div>
+    <!-- Quando chegar o print das noivas (com autorização), troque o texto abaixo pelo depoimento -->
+    <div class="depo">
+      <p>Espaço reservado para o depoimento das noivas. Entra aqui assim que chegar o print, com a autorização delas.</p>
+      <a class="botao escuro" href="https://www.instagram.com/bandavioletnight/" target="_blank" rel="noopener">Ver mais no Instagram</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ================= DÚVIDAS ================= -->
+<section class="faixa duvidas" id="duvidas">
+  <div class="miolo">
+    <div class="cabeca">
+      <h2 class="titulo">perguntas que <span class="d">todo casal faz</span></h2>
+    </div>
+    <details><summary>Vocês tocam música que a gente pedir?</summary><p>Sim. Fazemos arranjo personalizado, inclusive da música do casal.</p></details>
+    <details><summary>Quanto tempo dura o show?</summary><p>De 2 a 3 horas de banda ao vivo, com DJ nos intervalos para a pista não parar.</p></details>
+    <details><summary>Vocês levam som e luz?</summary><p>Podemos levar. Se o local ou a assessoria já tiver estrutura, usamos a de lá. O orçamento muda conforme o caso.</p></details>
+    <details><summary>Tocam fora do Rio de Janeiro?</summary><p>Sim. Combinamos a logística no orçamento.</p></details>
+    <details><summary>É só para casamento?</summary><p>Não. Também tocamos em aniversários, 15 anos, bodas e eventos de empresa.</p></details>
+    <details><summary>Quanto custa?</summary><p>Depende da data, do local, da duração e da estrutura. Chamem no WhatsApp que a gente monta um orçamento sob medida.</p></details>
+  </div>
+</section>
+
+<!-- ================= SIGA A VIOLET ================= -->
+<section class="faixa siga no-escuro">
+  <div class="miolo">
+    <div class="cabeca centro">
+      <h2 class="titulo">siga a <span class="d">violet</span></h2>
+      <a class="botao" href="https://www.instagram.com/bandavioletnight/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-insta"/></svg>seguir @bandavioletnight agora</a>
+    </div>
+    <div class="insta">
+      <img src="assets/festa-62.jpg" alt="">
+      <img src="assets/membro-pedro.jpg" alt="">
+      <img src="assets/festa-134.jpg" alt="">
+      <img src="assets/membro-negabelle.jpg" alt="">
+      <img src="assets/festa-116.jpg" alt="">
+      <img src="assets/membro-igor.jpg" alt="">
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= RODAPÉ ROXO ================= -->
+<footer class="rodape no-roxo">
+  <div class="miolo">
+    <div class="rod-texto">
+      <h2 class="titulo">a noite que vocês vão contar por anos <span class="d">começa com uma mensagem.</span></h2>
+      <div><a class="botao escuro" href="https://wa.me/5521967152172?text=Oi%2C%20Violet%20Night!%20Vou%20casar%20em%20%5Bdata%5D%20em%20%5Bcidade%5D%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-whats"/></svg>Verificar agenda</a></div>
+      <div class="contatos">
+        <div><h3>Shows e orçamentos</h3><a href="https://wa.me/5521967152172" target="_blank" rel="noopener">WhatsApp (21) 96715-2172</a></div>
+        <div><h3>Siga nas redes</h3><a href="https://www.instagram.com/bandavioletnight/" target="_blank" rel="noopener">Instagram @bandavioletnight</a></div>
+      </div>
+    </div>
+    <div class="rod-foto"><img src="assets/festa-116.jpg" alt="Drinn tocando baixo em casamento"></div>
+  </div>
+  <div class="rod-base"><div class="miolo"><span>2026 · Violet Night · Banda para casamentos e eventos · Rio de Janeiro</span><span>Todos os direitos reservados</span></div></div>
+</footer>
+
+<a class="flutuante" href="https://wa.me/5521967152172?text=Oi%2C%20Violet%20Night!%20Vou%20casar%20em%20%5Bdata%5D%20em%20%5Bcidade%5D%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener" aria-label="Falar com a Violet Night no WhatsApp">
+  <svg aria-hidden="true"><use href="#i-whats"/></svg>
+</a>
+
+<script>
+/* Texto que "acende" palavra por palavra ao rolar (efeito do From Zero).
+   Sem JavaScript, o texto aparece normal. */
+(function () {
+  var el = document.querySelector('[data-acende]');
+  if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var em = el.querySelector('em');
+  var finalTxt = em ? em.textContent : '';
+  if (em) em.remove();
+  var partes = el.textContent.trim().split(/\s+/);
+  el.innerHTML = partes.map(function (w) { return '<span class="w">' + w + '</span>'; }).join(' ') + ' ' +
+    finalTxt.split(/\s+/).map(function (w) { return '<span class="w ouro">' + w + '</span>'; }).join(' ');
+  var ws = el.querySelectorAll('.w');
+  function atualiza() {
+    var r = el.getBoundingClientRect(), vh = window.innerHeight;
+    var p = Math.min(1, Math.max(0, (vh * .9 - r.top) / (r.height + vh * .3)));
+    var n = Math.max(Math.round(p * ws.length), Math.round(ws.length * .35));
+    ws.forEach(function (w, i) { w.classList.toggle('on', i < n); });
+  }
+  window.addEventListener('scroll', atualiza, { passive: true });
+  window.addEventListener('resize', atualiza);
+  atualiza();
+})();
+</script>
+</body>
+</html>
