@@ -12,7 +12,7 @@
 <link rel="icon" href="assets/logo-vn.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Outfit:wght@300;500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter+Tight:wght@300;400;500;600;700&family=Outfit:wght@300;500;700;800&display=swap">
 <style>
 /* =====================================================================
    VIOLET NIGHT  ·  MOBILE FIRST
@@ -28,7 +28,9 @@
   --roxo:        #5a0fc8;  /* roxo da marca, escuro e intenso: blocos, faixas, rodapé */
   --roxo-fundo:  #3d0a8a;  /* roxo mais fundo para sombras e gradientes */
   --eletrico:    #a63bff;  /* violeta elétrico: destaques sobre o escuro */
-  --ouro:        #ffc21a;  /* dourado brilhante: botões, números, destaques no roxo */
+  --ouro:        #f4c55c;  /* dourado do logo: textos e detalhes */
+  --ouro-metal:  linear-gradient(135deg, #fff0b8 0%, #f4c55c 38%, #d39a32 68%, #f7d98a 100%); /* dourado metálico, como o do logo */
+  --borda:       #24093f;  /* roxo quase preto: bordas dos botões */
   --noite:       #0b0612;  /* fundo principal */
   --grafite:     #170e24;  /* blocos escuros */
   --nevoa:       #f4f1f9;  /* seções claras */
@@ -39,6 +41,7 @@
 
   --f-titulo: "Outfit", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --f-texto:  "Inter Tight", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --f-classica: "Cinzel", "Trajan Pro", "Times New Roman", Georgia, serif; /* ecoa as letras do logo */
 
   --largura: 1180px;
   --gl: max(18px, env(safe-area-inset-left, 0px));
@@ -59,21 +62,29 @@ p { margin: 0; }
 /* Títulos estilo "notícias quentinhas": caixa baixa, palavras em destaque */
 .titulo { font-weight: 300; font-size: clamp(2rem, 8vw, 3.6rem); line-height: 1.05; letter-spacing: -.02em; text-transform: lowercase; }
 .titulo b { font-weight: 800; }
-.titulo .d { color: var(--roxo); font-weight: 800; }
-.no-escuro .titulo .d { color: var(--eletrico); }
-.no-roxo .titulo .d { color: var(--ouro); }
-.caps { text-transform: uppercase; letter-spacing: .14em; font-size: .78rem; font-weight: 700; }
+.titulo .d { font-family: var(--f-classica); font-weight: 700; letter-spacing: .01em; color: var(--roxo); }
+.no-escuro .titulo .d, .no-roxo .titulo .d, .metal {
+  background: var(--ouro-metal); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.caps { font-family: var(--f-classica); text-transform: uppercase; letter-spacing: .2em; font-size: .8rem; font-weight: 700; }
+/* luazinha antes dos rótulos de seção, como a lua do logo */
+.cabeca > .caps, .faixas > .caps, .intro-texto > .caps { display: inline-flex; align-items: center; gap: 10px; }
+.cabeca > .caps::before, .faixas > .caps::before, .intro-texto > .caps::before {
+  content: ""; width: 12px; height: 12px; border-radius: 50%; box-shadow: inset -3px 1px 0 0 var(--ouro); transform: rotate(-20deg); flex: none; }
 
 .faixa { padding-left: var(--gl); padding-right: var(--gr); padding-block: 64px; position: relative; }
 .miolo { max-width: var(--largura); margin: 0 auto; position: relative; }
 @media (min-width: 900px) { .faixa { padding-block: 112px; } body { font-size: 1.05rem; } }
 
-/* Botões em pílula (área de toque mínima de 48px) */
-.botao { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; text-decoration: none; font-weight: 700; font-size: 1rem;
-  padding: 13px 26px; border-radius: 999px; background: var(--ouro); color: var(--tinta); transition: transform .2s, box-shadow .2s; }
-.botao:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -8px var(--ouro); }
-.botao.escuro { background: var(--tinta); color: var(--branco); }
-.botao.contorno { background: transparent; color: inherit; border: 1.5px solid currentColor; }
+/* Botões estilo adesivo: borda escura + sombra sólida deslocada.
+   Ao tocar, o botão "afunda" no lugar da sombra. Área de toque mínima de 48px. */
+.botao { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; text-decoration: none; font-weight: 700; font-size: 1rem;
+  padding: 12px 24px; border-radius: 10px; border: 2px solid var(--borda); background: var(--ouro-metal); color: var(--borda);
+  box-shadow: 4px 4px 0 var(--eletrico); transition: transform .15s, box-shadow .15s; }
+.botao:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--eletrico); }
+.botao.escuro { background: var(--borda); color: var(--branco); box-shadow: 4px 4px 0 var(--ouro); }
+.botao.escuro:hover { box-shadow: 5px 5px 0 var(--ouro); }
+.botao.contorno { background: var(--grafite); color: var(--branco); border-color: var(--branco); }
+.botao:active, .botao.escuro:active { transform: translate(4px, 4px); box-shadow: 0 0 0 transparent; }
 .botao svg { width: 20px; height: 20px; flex: none; }
 
 /* ---------- Menu ---------- */
@@ -82,7 +93,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .topo .miolo { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 64px; }
 .topo .marca img { width: 46px; height: 46px; }
 .menu { display: none; }
-.topo .botao { min-height: 42px; padding: 8px 16px; font-size: .88rem; }
+.topo .botao { min-height: 42px; padding: 7px 15px; font-size: .88rem; box-shadow: 3px 3px 0 var(--eletrico); }
 @media (min-width: 960px) {
   .topo .miolo { height: 72px; }
   .menu { display: flex; list-style: none; margin: 0; padding: 0; align-self: stretch; }
@@ -99,7 +110,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .hero .miolo { z-index: 1; display: grid; justify-items: center; text-align: center; gap: 20px; padding: 28px var(--gr) 104px var(--gl); }
 .hero .logo-grande { width: min(260px, 66vw); filter: drop-shadow(0 0 36px color-mix(in srgb, var(--eletrico) 70%, transparent)); }
 .hero h1 { font-weight: 300; font-size: clamp(2rem, 9vw, 4rem); line-height: 1.05; letter-spacing: -.02em; text-transform: lowercase; max-width: 15ch; }
-.hero h1 b { font-weight: 800; color: var(--ouro); }
+.hero h1 b { font-family: var(--f-classica); font-weight: 700; background: var(--ouro-metal); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--ouro) 45%, transparent)); }
 .hero .apoio { color: var(--cinza); font-size: .9rem; max-width: 30ch; }
 @media (min-width: 900px) {
   .hero .miolo { gap: 24px; padding: 64px var(--gr) 170px var(--gl); }
@@ -112,7 +124,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .letreiro { position: absolute; left: -6%; right: -6%; top: 24px; transform: rotate(-3deg); background: var(--roxo); color: var(--branco);
   overflow: hidden; padding-block: 10px; box-shadow: 0 0 36px -6px color-mix(in srgb, var(--eletrico) 80%, transparent); }
 .letreiro div { display: flex; width: max-content; animation: corre 24s linear infinite; }
-.letreiro span { font-family: var(--f-titulo); font-weight: 800; font-size: 1.1rem; text-transform: uppercase; white-space: nowrap; padding-right: .6em; }
+.letreiro span { font-family: var(--f-classica); font-weight: 700; font-size: 1.1rem; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; padding-right: .6em; }
 .letreiro span i { font-style: normal; color: var(--ouro); padding: 0 .4em; }
 @keyframes corre { to { transform: translateX(-50%); } }
 @media (min-width: 900px) { .letreiro-wrap { margin-top: -70px; height: 120px; } .letreiro { top: 30px; padding-block: 14px; } .letreiro span { font-size: 1.9rem; } }
@@ -123,10 +135,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   border-radius: 0 60% 45% 0 / 0 55% 50% 0; }
 .cartao-escuro { background: var(--grafite); border-radius: 24px 24px var(--raio-grande) 24px; padding: 18px 18px 32px;
   display: grid; gap: 24px; position: relative; border: 1px solid color-mix(in srgb, var(--eletrico) 25%, transparent); }
-/* Takes do ensaio: uma foto larga em cima e duas verticais embaixo */
+/* Takes do ensaio: duas fotos verticais lado a lado */
 .takes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; min-width: 0; }
-.takes img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; aspect-ratio: 1; }
-.takes .take-grande { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
+.takes img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; aspect-ratio: 4 / 5; }
 .intro-texto { display: grid; gap: 20px; min-width: 0; padding-inline: 4px; }
 .intro-texto > .caps { color: var(--eletrico); }
 .acende { font-family: var(--f-titulo); font-weight: 500; font-size: 1.35rem; line-height: 1.32; letter-spacing: -.01em; }
@@ -141,9 +152,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 @media (min-width: 820px) {
   .bloco-intro { padding-top: 72px; }
   .bloco-intro::before { left: -12%; top: 14%; width: 42%; height: 76%; }
-  .cartao-escuro { grid-template-columns: .9fr 1.1fr; gap: 52px; align-items: center; padding: 44px; }
+  .cartao-escuro { grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; padding: 40px; }
   .takes { gap: 10px; }
-  .takes img { aspect-ratio: 3 / 4; border-radius: 18px; }
+  .takes img { aspect-ratio: 9 / 16; border-radius: 18px; }
   .acende { font-size: clamp(1.5rem, 2.4vw, 2rem); }
 }
 
@@ -165,6 +176,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .cabeca .caps { color: var(--roxo); }
 .grade-3 { display: grid; gap: 40px; }
 .dif { display: grid; gap: 10px; align-content: start; text-align: center; justify-items: center; }
+/* Flor do logo como enfeite discreto */
+.diferenciais::after { content: ""; position: absolute; left: 0; bottom: 0; width: 120px; height: 160px;
+  background: url("assets/flor.png") no-repeat left bottom / contain; opacity: .3; pointer-events: none; }
+.rodape::after { content: ""; position: absolute; right: 0; top: 40px; width: 110px; height: 150px; transform: scaleX(-1);
+  background: url("assets/flor.png") no-repeat left top / contain; opacity: .35; pointer-events: none; }
+@media (min-width: 900px) { .diferenciais::after { width: 210px; height: 280px; } .rodape::after { width: 200px; height: 270px; top: 60px; } }
 .dif .numero { font-family: var(--f-titulo); font-weight: 800; font-size: 3rem; line-height: 1; color: var(--roxo); letter-spacing: -.03em; }
 .dif h3 { font-size: 1.25rem; font-weight: 700; }
 .dif p:last-child { color: var(--cinza-claro); font-size: .97rem; max-width: 34ch; }
@@ -241,7 +258,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* ---------- Quem viveu, conta: faixa roxa com curva (notícias do Farofa) ---------- */
 .fundo-claro { background: var(--nevoa); }
-.prova { background: var(--roxo); color: var(--branco); border-radius: var(--raio-grande) var(--raio-grande) 0 0; }
+.prova { background: var(--roxo); color: var(--branco); border-radius: 50% 50% 0 0 / var(--raio-grande) var(--raio-grande) 0 0; } /* curva de "nascer da lua" */
 .cards { display: grid; gap: 18px; max-width: 460px; margin-inline: auto; }
 .card { background: var(--tinta); color: var(--branco); border-radius: 22px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
 .card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
@@ -275,7 +292,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* ---------- Rodapé roxo com contatos (Farofa) ---------- */
 .rodape { background: var(--roxo); color: var(--branco); padding-left: var(--gl); padding-right: var(--gr); padding-top: 56px; position: relative; overflow: hidden;
-  border-radius: var(--raio-grande) var(--raio-grande) 0 0; }
+  border-radius: 50% 50% 0 0 / var(--raio-grande) var(--raio-grande) 0 0; }
 .rodape .miolo { display: grid; gap: 32px; }
 .rod-texto { display: grid; gap: 24px; min-width: 0; }
 .contatos { display: grid; gap: 18px; }
@@ -297,13 +314,15 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* Botão flutuante do WhatsApp */
 .flutuante { position: fixed; z-index: 35; right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-  width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--ouro); color: var(--tinta);
-  box-shadow: 0 12px 30px -8px rgba(0,0,0,.6), 0 0 0 4px color-mix(in srgb, var(--ouro) 30%, transparent); }
+  width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--ouro-metal); color: var(--borda);
+  border: 2px solid var(--borda); box-shadow: 3px 3px 0 var(--eletrico); transition: transform .15s, box-shadow .15s; }
+.flutuante:active { transform: translate(3px, 3px); box-shadow: 0 0 0 transparent; }
 .flutuante svg { width: 28px; height: 28px; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .letreiro div, .selo svg { animation: none; }
+  .botao, .flutuante { transition: none; }
 }
 </style>
 </head>
@@ -365,7 +384,6 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     <div class="cartao-escuro">
       <!-- Takes do ensaio de 11/10/2026. Para trocar, substitua os arquivos em assets/ -->
       <div class="takes">
-        <img class="take-grande" src="assets/ensaio-gopro-1.jpg" alt="Drinn no baixo, Negabelle no vocal e Pedro Per na guitarra durante o ensaio">
         <img src="assets/ensaio-negabelle.jpg" alt="Negabelle cantando no ensaio, com Igor Moreira na bateria e Pedro Per na guitarra">
         <img src="assets/ensaio-voz-guitarra.jpg" alt="Negabelle e Pedro Per no ensaio, com Drinn no baixo ao fundo">
       </div>
